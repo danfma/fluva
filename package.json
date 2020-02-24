@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "@fluva/root",
+  "version": "1.0.0",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "typescript": "^3.8.2"
+  }
+}

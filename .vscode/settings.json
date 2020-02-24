@@ -1,0 +1,10 @@
+{
+  "javascript.preferences.quoteStyle": "double",
+  "typescript.preferences.quoteStyle": "double",
+  "javascript.format.semicolons": "remove",
+  "typescript.format.semicolons": "remove",
+  "importSorter.importStringConfiguration.quoteMark": "double",
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "importSorter.importStringConfiguration.hasSemicolon": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
