@@ -9,7 +9,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "publish": "lerna publish --skip-git",
+    "publish-all": "lerna publish --skip-git",
     "test": "lerna run test"
   },
   "devDependencies": {
