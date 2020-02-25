@@ -1,4 +1,4 @@
-import { AbstractValidator, equalTo } from "@src"
+import { AbstractValidator, equalTo } from "@fluva"
 
 describe("EqualTo", () => {
 

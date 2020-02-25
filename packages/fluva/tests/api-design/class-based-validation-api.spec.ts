@@ -1,4 +1,4 @@
-import { AbstractValidator, maxLength, notEmpty, required, ValidationError } from "@src"
+import { AbstractValidator, maxLength, notEmpty, required, ValidationError } from "@fluva"
 
 describe("Simple class validation", () => {
   class Person {
