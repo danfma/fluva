@@ -1,4 +1,4 @@
-import { AbstractValidator, maxLength, notEmpty, required } from "@src"
+import { AbstractValidator, maxLength, notEmpty, required, ValidationError } from "@src"
 
 describe("Simple class validation", () => {
   class Person {
@@ -84,5 +84,25 @@ describe("Simple class validation", () => {
         ]
       }
     ])
+  })
+
+  it("should throw an error when calling validateOrThrow", async () => {
+    const validator = new PersonValidator()
+
+    const person: Person = {
+      name: null
+    }
+
+    try {
+      await validator.validateOrThrow(person)
+      fail("Should have failed")
+
+    } catch (e) {
+      if (!(e instanceof ValidationError)) {
+        throw e
+      }
+
+      expect(e.unconformities).toHaveLength(2)
+    }
   })
 })

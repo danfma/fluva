@@ -1,8 +1,8 @@
 import {
-  AbstractValidator, forEach, maxLength, minLength, notEmpty, onlyDigits, required
+    AbstractValidator, forEach, maxLength, minLength, notEmpty, onlyDigits, required
 } from "@src"
 
-describe("Composed validation", () => {
+describe("Class based composed validation", () => {
 
   class Phone {
     constructor(

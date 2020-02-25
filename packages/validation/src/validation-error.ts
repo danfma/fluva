@@ -4,7 +4,7 @@ import { ValidationResult } from "./validation-result"
 export class ValidationError extends Error {
   constructor(
     readonly validationResult: ValidationResult,
-    readonly validatedProperties: string[] = [],
+    readonly validatedProperties: string[],
     readonly remotelyValidated = false
   ) {
     super()
