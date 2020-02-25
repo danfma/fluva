@@ -1,7 +1,7 @@
 import {
     createValidator, forEach, maxLength, minLength, notEmpty, onlyDigits, required, verify,
     verifyWithValidator
-} from "@src"
+} from "@fluva"
 
 describe("Functional composed validation", () => {
 

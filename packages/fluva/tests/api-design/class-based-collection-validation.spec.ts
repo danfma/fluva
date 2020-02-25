@@ -1,6 +1,6 @@
 import {
     AbstractValidator, forEach, maxLength, minLength, notEmpty, onlyDigits, required
-} from "@src"
+} from "@fluva"
 
 describe("Class based composed validation", () => {
 

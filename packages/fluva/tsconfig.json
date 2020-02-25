@@ -8,7 +8,7 @@
       "tests"
     ],
     "paths": {
-      "@src": [
+      "@fluva": [
         "src"
       ]
     }

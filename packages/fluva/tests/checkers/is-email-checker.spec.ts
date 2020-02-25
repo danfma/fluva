@@ -1,4 +1,4 @@
-import { AbstractValidator, equalTo, isEmail } from "@src"
+import { AbstractValidator, equalTo, isEmail } from "@fluva"
 
 describe("IsEmail", () => {
 

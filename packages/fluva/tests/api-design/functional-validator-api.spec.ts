@@ -1,4 +1,4 @@
-import { createValidator, required, verify } from "@src"
+import { createValidator, required, verify } from "@fluva"
 
 describe("The functional validator API", () => {
   type Person = {
