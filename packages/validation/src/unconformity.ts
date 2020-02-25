@@ -8,9 +8,12 @@ export class Unconformity {
     readonly validatingFieldName: string,
     readonly severity = Severity.Error,
     readonly message = `validation.rule.${errorType}`,
-    readonly additionalMessageParams: Record<string, any> = {}
-  ) {
+    readonly additionalMessageParams: Record<string, any> = {}) {
 
+  }
+
+  get validatingPathAsString(): string {
+    return this.validatingPath.join(".")
   }
 
   with(data: Partial<Unconformity>): Unconformity {

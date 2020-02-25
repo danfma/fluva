@@ -2,10 +2,20 @@
   "extends": "../../tsconfig.base",
   "compilerOptions": {
     "outDir": "./lib/es5",
-    "baseUrl": "./src",
+    "baseUrl": ".",
+    "rootDirs": [
+      "src",
+      "tests"
+    ],
+    "paths": {
+      "@src": [
+        "src"
+      ]
+    }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "tests/**/*"
   ],
   "exclude": [
     "lib/**"
