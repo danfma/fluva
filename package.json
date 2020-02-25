@@ -9,7 +9,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "publish-all": "lerna publish --skip-git",
+    "publish-ci": "lerna publish from-package -y --no-verify-access",
     "test": "lerna run test"
   },
   "devDependencies": {
