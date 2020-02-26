@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base",
+  "compilerOptions": {
+    "outDir": "./lib/es5",
+    "baseUrl": ".",
+    "rootDirs": [
+      "src",
+      "tests"
+    ],
+    "paths": {
+      "@fluva-mobx": [
+        "src"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*"
+  ],
+  "exclude": [
+    "lib/**"
+  ]
+}
