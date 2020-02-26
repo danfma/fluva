@@ -1,6 +1,6 @@
 {
   "name": "fluva",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/es5/index.js",
   "module": "lib/es2015/index.js",
   "license": "MIT",
