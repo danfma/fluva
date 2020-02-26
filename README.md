@@ -3,8 +3,6 @@
 A set of packages for handling validation.
 
 
-## @fluva/validation
+## Packages
 
-A Fluent Validation (https://fluentvalidation.net/) inspired packages for handling validation
-
-TODO
+- fluva [![npm latest](http://img.shields.io/npm/v/fluva.svg?style=flat)](https://npmjs.org/package/fluva "View this project on npm")
