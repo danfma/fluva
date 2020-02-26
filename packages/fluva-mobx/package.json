@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "fluva": "^0.0.3",
-    "mobx": "~4.15"
+    "mobx": "^4.15"
   }
 }
