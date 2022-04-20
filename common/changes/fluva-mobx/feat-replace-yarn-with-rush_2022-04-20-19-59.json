@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "fluva-mobx",
+      "comment": "Upgrade dependencies",
+      "type": "minor"
+    }
+  ],
+  "packageName": "fluva-mobx"
+}
