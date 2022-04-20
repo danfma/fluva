@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "fluva",
+      "comment": "Remove incomplete functional support",
+      "type": "major"
+    }
+  ],
+  "packageName": "fluva"
+}
