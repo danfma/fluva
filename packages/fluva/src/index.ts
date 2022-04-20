@@ -11,4 +11,3 @@ export { Validator } from './validator'
 export { AbstractValidator } from "./abstract-validator"
 export { forEach, ForEachValidator } from "./for-each"
 export * from "./rule-checkers"
-export * from "./functional"
