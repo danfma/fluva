@@ -7,5 +7,5 @@ export enum CascadeChecking {
   /**
    * Stops the checking on first error found.
    */
-  StopOnFirstError
+  StopOnFirstError,
 }

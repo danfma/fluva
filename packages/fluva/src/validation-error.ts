@@ -1,5 +1,5 @@
-import { Unconformity } from "./unconformity"
-import { ValidationResult } from "./validation-result"
+import { Unconformity } from "./unconformity";
+import { ValidationResult } from "./validation-result";
 
 export class ValidationError extends Error {
   constructor(
@@ -7,11 +7,11 @@ export class ValidationError extends Error {
     readonly validatedProperties: string[],
     readonly remotelyValidated = false
   ) {
-    super()
-    Object.setPrototypeOf(this, ValidationError.prototype)
+    super();
+    Object.setPrototypeOf(this, ValidationError.prototype);
   }
 
   get unconformities(): Unconformity[] {
-    return this.validationResult.unconformities
+    return this.validationResult.unconformities;
   }
 }

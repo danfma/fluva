@@ -1,39 +1,39 @@
-import { AbstractValidator } from "./abstract-validator"
-import { CascadeChecking } from "./cascade-checking"
-import { flatten } from "./utils"
-import { ValidationContext } from "./validation-context"
-import { ValidationResult } from "./validation-result"
-import { Validator } from "./validator"
+import { AbstractValidator } from "./abstract-validator";
+import { Unconformity } from "./unconformity";
+import { flatten } from "./utils";
+import { ValidationContext } from "./validation-context";
+import { ValidationResult } from "./validation-result";
+import { Validator } from "./validator";
 
 export class ForEachValidator<T> extends AbstractValidator<T[]> {
   constructor(readonly validator: Validator<T>) {
-    super()
+    super();
   }
 
   protected async validateContext(
     _onlyProperties: string[],
-    validationContext: ValidationContext<T[]>): Promise<ValidationResult> {
-
-    const { parent: items } = validationContext
+    validationContext: ValidationContext<T[]>
+  ): Promise<ValidationResult> {
+    const { parent: items } = validationContext;
 
     const unconformities = await Promise.all(
-      items.map((item, index) => this.validateItem(item, index))
-    )
+      items.map(async (item, index) => await this.validateItem(item, index))
+    );
 
-    return new ValidationResult(flatten(unconformities))
+    return new ValidationResult(flatten(unconformities));
   }
 
-  private async validateItem(item: T, index: number) {
-    const result = await this.validator.validate(item)
+  private async validateItem(item: T, index: number): Promise<Unconformity[]> {
+    const result = await this.validator.validate(item);
 
-    return result.unconformities.map(
-      unconformity => unconformity.with({
-        validatingPath: [`${index}`, ...unconformity.validatingPath]
+    return result.unconformities.map((unconformity) =>
+      unconformity.with({
+        validatingPath: [`${index}`, ...unconformity.validatingPath],
       })
-    )
+    );
   }
 }
 
 export function forEach<T>(validator: Validator<T>): Validator<T[]> {
-  return new ForEachValidator(validator)
+  return new ForEachValidator(validator);
 }

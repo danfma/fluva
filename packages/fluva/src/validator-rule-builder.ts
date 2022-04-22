@@ -5,19 +5,28 @@ import { Validator } from "./validator";
 import { PropertyRule } from "./property-rule";
 import { ValidatorDelegatedRule } from "./validator-delegated-rule";
 
-export class ValidatorRuleBuilder<TRoot, TProperty> implements RuleBuilder<TRoot, TProperty> {
+export class ValidatorRuleBuilder<TRoot, TProperty>
+  implements RuleBuilder<TRoot, TProperty>
+{
   constructor(
     readonly property: keyof TRoot,
     readonly selector: (target: TRoot) => TProperty,
-    readonly rules: Rule<TRoot>[]) {
+    readonly rules: Array<Rule<TRoot>>
+  ) {}
 
-  }
-
-  verify(...checkers: RuleChecker<TRoot, TProperty>[]): void {
-    this.rules.push(new PropertyRule(this.property as string, this.selector, checkers))
+  verify(...checkers: Array<RuleChecker<TRoot, TProperty>>): void {
+    this.rules.push(
+      new PropertyRule(this.property as string, this.selector, checkers)
+    );
   }
 
   useValidator(validator: Validator<TProperty>): void {
-    this.rules.push(new ValidatorDelegatedRule(this.property as string, this.selector, validator))
+    this.rules.push(
+      new ValidatorDelegatedRule(
+        this.property as string,
+        this.selector,
+        validator
+      )
+    );
   }
 }

@@ -10,9 +10,5 @@
     "build": "lerna run build",
     "publish-ci": "lerna publish from-package -y --no-verify-access",
     "test": "lerna run test"
-  },
-  "devDependencies": {
-    "@microsoft/rush": "^5.66.2",
-    "typescript": "^4.6.3"
   }
 }

@@ -1,22 +1,25 @@
 {
   "name": "fluva",
   "version": "0.0.3",
-  "main": "lib/es5/index.js",
-  "module": "lib/es2015/index.js",
-  "typings": "lib/es5/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "typings": "lib/esm/index.d.ts",
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "nps build",
+    "build": "heft build --clean",
     "test": "nps test",
     "test:watch": "nps test.watch"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
+    "@types/heft-jest": "^1.0.2",
+    "eslint": "^8.13.0",
+    "eslint-config-fluva": "workspace:*",
     "jest": "^27.5.1",
-    "nps": "^5.10.0",
-    "nps-utils": "^1.7.0",
     "ts-jest": "^27.1.4",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "@rushstack/heft": "^0.44.13",
+    "@rushstack/heft-jest-plugin": "^0.2.14"
   }
 }

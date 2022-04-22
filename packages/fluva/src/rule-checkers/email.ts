@@ -2,11 +2,12 @@ import { PropertyValidationContext } from "../property-validation-context";
 import { Unconformity } from "../unconformity";
 import { MatchPatternRule } from "./match-pattern";
 
-export class OnlyDigitsRule<TRoot> extends MatchPatternRule<TRoot> {
-  static readonly pattern = /^[0-9]*$/;
+export class EmailRule<TRoot> extends MatchPatternRule<TRoot> {
+  static readonly pattern =
+    /^([a-zA-Z][a-zA-Z0-9._-]*)@([a-zA-Z][a-zA-Z0-9_-]*(\.[a-zA-Z][a-zA-Z0-9_-]*){0,2})$/;
 
   constructor() {
-    super(OnlyDigitsRule.pattern);
+    super(EmailRule.pattern);
   }
 
   protected async checkValue(
@@ -16,13 +17,13 @@ export class OnlyDigitsRule<TRoot> extends MatchPatternRule<TRoot> {
 
     return (
       unconformity?.with({
-        errorType: "onlyDigits",
-        message: "validation.rule.onlyDigits",
+        errorType: "email",
+        message: "validation.rule.email",
       }) ?? undefined
     );
   }
 }
 
-export function onlyDigits<TRoot>(): OnlyDigitsRule<TRoot> {
-  return new OnlyDigitsRule<TRoot>();
+export function email<TRoot>(): EmailRule<TRoot> {
+  return new EmailRule<TRoot>();
 }

@@ -1,4 +1,4 @@
-import { ValidationContext } from "./validation-context"
+import { ValidationContext } from "./validation-context";
 
 export class PropertyValidationContext<TRoot = unknown, TProperty = unknown> {
   constructor(
@@ -6,15 +6,13 @@ export class PropertyValidationContext<TRoot = unknown, TProperty = unknown> {
     readonly propertyPath: string[],
     readonly propertyName: string,
     readonly propertyValue: TProperty
-  ) {
-
-  }
+  ) {}
 
   get parent(): TRoot {
-    return this.validationContext.parent
+    return this.validationContext.parent;
   }
 
   get fullPropertyPath(): string {
-    return [...this.propertyPath].join('.')
+    return [...this.propertyPath].join(".");
   }
 }

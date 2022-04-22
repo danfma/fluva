@@ -1,0 +1,26 @@
+{
+  "name": "eslint-config-fluva",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "",
+    "test": ""
+  },
+  "devDependencies": {
+    "@rushstack/eslint-config": "^2.5.4",
+    "typescript": "^4.6.3",
+    "eslint": "^8.14.0",
+    "prettier": "^2.6.2",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-prettier": "^4.0.0"
+  },
+  "keywords": [
+    "tool",
+    "eslint",
+    "eslint-plugin",
+    "eslint-config"
+  ],
+  "author": "Daniel Ferreira Monteiro Alves <danfma@gmail.com>",
+  "license": "ISC"
+}

@@ -1,5 +1,5 @@
-import { PropertyValidationContext } from "./property-validation-context"
-import { Severity } from "./severity"
+import { PropertyValidationContext } from "./property-validation-context";
+import { Severity } from "./severity";
 
 export class Unconformity {
   constructor(
@@ -8,12 +8,11 @@ export class Unconformity {
     readonly validatingFieldName: string,
     readonly severity = Severity.Error,
     readonly message = `validation.rule.${errorType}`,
-    readonly additionalMessageParams: Record<string, any> = {}) {
-
-  }
+    readonly additionalMessageParams: Record<string, unknown> = {}
+  ) {}
 
   get validatingPathAsString(): string {
-    return this.validatingPath.join(".")
+    return this.validatingPath.join(".");
   }
 
   with(data: Partial<Unconformity>): Unconformity {
@@ -23,8 +22,8 @@ export class Unconformity {
       validatingFieldName = this.validatingFieldName,
       severity = this.severity,
       message = this.message,
-      additionalMessageParams = this.additionalMessageParams
-    } = data
+      additionalMessageParams = this.additionalMessageParams,
+    } = data;
 
     return new Unconformity(
       errorType,
@@ -33,13 +32,13 @@ export class Unconformity {
       severity,
       message,
       additionalMessageParams
-    )
+    );
   }
 
   static fromContext(
     context: PropertyValidationContext,
     errorType: string,
-    additionalMessageParams: Record<string, any> = {}
+    additionalMessageParams: Record<string, unknown> = {}
   ): Unconformity {
     return new Unconformity(
       errorType,
@@ -48,6 +47,6 @@ export class Unconformity {
       undefined,
       undefined,
       additionalMessageParams
-    )
+    );
   }
 }

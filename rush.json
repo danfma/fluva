@@ -474,6 +474,13 @@
     //   "tags": ["tools"]
     // }
     {
+      "packageName": "eslint-config-fluva",
+      "projectFolder": "tools/eslint-config-fluva",
+      "reviewCategory": "tool",
+      "tags": ["tool"],
+      "shouldPublish": false
+    },
+    {
       "packageName": "fluva",
       "projectFolder": "packages/fluva",
       "reviewCategory": "production",
