@@ -6,3 +6,4 @@ export { equalTo, EqualToRule } from "./equal-to";
 export { matchPattern, MatchPatternRule } from "./match-pattern";
 export { email, EmailRule as IsEmailRule } from "./email";
 export { onlyDigits, OnlyDigitsRule } from "./only-digits";
+export * from "./satisfy";
