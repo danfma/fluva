@@ -1,32 +1,54 @@
-import { PropertyValidationContext } from "./property-validation-context"
-import { Severity } from "./severity"
-import { Unconformity } from "./unconformity"
+import { PropertyValidationContext } from "./property-validation-context";
+import { Severity } from "./severity";
+import { Unconformity } from "./unconformity";
+import { isNullOrUndefined } from "./utils";
 
 export abstract class RuleChecker<TRoot, TProperty> {
-  abstract check(context: PropertyValidationContext<TRoot, TProperty>): Promise<Unconformity | null>
+  protected abstract checkValue(
+    context: PropertyValidationContext<TRoot, TProperty>
+  ): Promise<Unconformity | undefined>;
+
+  /**
+   * Check the value of the property contained in the specified validation context.
+   *
+   * @param context the context of the validation.
+   * @returns
+   */
+  async check(
+    context: PropertyValidationContext<TRoot, TProperty>
+  ): Promise<Unconformity | undefined> {
+    const { propertyValue } = context;
+
+    return !isNullOrUndefined(propertyValue)
+      ? await this.checkValue(context)
+      : undefined;
+  }
 
   withCustomMessage(message: string): RuleChecker<TRoot, TProperty> {
-    // eslint-disable-next-line no-use-before-define
-    return new RuleCheckerWithUnconformityOverrides(this, { message })
+    const sourceChecker = this;
+
+    return new (class extends RuleChecker<TRoot, TProperty> {
+      async checkValue(
+        context: PropertyValidationContext<TRoot, TProperty>
+      ): Promise<Unconformity | undefined> {
+        const unconformity = await sourceChecker.check(context);
+
+        return unconformity?.with({ message }) ?? undefined;
+      }
+    })();
   }
 
   withSeverity(severity: Severity): RuleChecker<TRoot, TProperty> {
-    // eslint-disable-next-line no-use-before-define
-    return new RuleCheckerWithUnconformityOverrides(this, { severity })
-  }
-}
+    const sourceChecker = this;
 
-class RuleCheckerWithUnconformityOverrides<TRoot, TProperty> extends RuleChecker<TRoot, TProperty> {
-  constructor(
-    readonly delegatedChecker: RuleChecker<TRoot, TProperty>,
-    readonly unconformityOverrides: Partial<Unconformity>
-  ) {
-    super()
-  }
+    return new (class extends RuleChecker<TRoot, TProperty> {
+      async checkValue(
+        context: PropertyValidationContext<TRoot, TProperty>
+      ): Promise<Unconformity | undefined> {
+        const unconformity = await sourceChecker.check(context);
 
-  async check(context: PropertyValidationContext<TRoot, TProperty>): Promise<Unconformity | null> {
-    const unconformity = await this.delegatedChecker.check(context)
-
-    return unconformity?.with(this.unconformityOverrides) ?? null
+        return unconformity?.with({ severity }) ?? undefined;
+      }
+    })();
   }
 }

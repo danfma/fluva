@@ -1,43 +1,48 @@
-import { PropertyValidationContext } from "../property-validation-context"
-import { RuleChecker } from "../rule-checker"
-import { Unconformity } from "../unconformity"
+import { PropertyValidationContext } from "../property-validation-context";
+import { RuleChecker } from "../rule-checker";
+import { Unconformity } from "../unconformity";
 
-type Getter<TRoot, TProperty> = (parent: TRoot) => TProperty
-type ValueOrGetter<TRoot, TProperty> = Getter<TRoot, TProperty> | TProperty
+type Getter<TRoot, TProperty> = (parent: TRoot) => TProperty;
+type ValueOrGetter<TRoot, TProperty> = Getter<TRoot, TProperty> | TProperty;
 
 function isGetter<TRoot, TProperty>(
   valueOrGetter: ValueOrGetter<TRoot, TProperty>
 ): valueOrGetter is Getter<TRoot, TProperty> {
-  return typeof valueOrGetter === 'function'
+  return typeof valueOrGetter === "function";
 }
 
-export class EqualToRule<TRoot, TProperty> extends RuleChecker<TRoot, TProperty> {
+export class EqualToRule<TRoot, TProperty> extends RuleChecker<
+  TRoot,
+  TProperty
+> {
   constructor(readonly valueOrGetter: ValueOrGetter<TRoot, TProperty>) {
-    super()
+    super();
   }
 
-  async check(context: PropertyValidationContext<TRoot, TProperty>): Promise<Unconformity | null> {
-    const { propertyValue, parent } = context
-    const expectedValue = this.getExpectedValue(parent)
+  protected async checkValue(
+    context: PropertyValidationContext<TRoot, TProperty>
+  ): Promise<Unconformity | undefined> {
+    const { propertyValue, parent } = context;
+    const expectedValue = this.getExpectedValue(parent);
 
     if (propertyValue !== expectedValue) {
-      return Unconformity.fromContext(context, 'equalTo', {
-        expected: expectedValue
-      })
+      return Unconformity.fromContext(context, "equalTo", {
+        expected: expectedValue,
+      });
     }
 
-    return null
+    return undefined;
   }
 
   private getExpectedValue(parent: TRoot): TProperty {
-    const valueOrGetter = this.valueOrGetter
+    const valueOrGetter = this.valueOrGetter;
 
-    return isGetter(valueOrGetter) ? valueOrGetter(parent) : valueOrGetter
+    return isGetter(valueOrGetter) ? valueOrGetter(parent) : valueOrGetter;
   }
 }
 
 export function equalTo<TRoot, TProperty>(
   value: ValueOrGetter<TRoot, TProperty>
 ): EqualToRule<TRoot, TProperty> {
-  return new EqualToRule(value)
+  return new EqualToRule(value);
 }

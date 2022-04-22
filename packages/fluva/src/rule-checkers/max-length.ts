@@ -1,28 +1,33 @@
-import { PropertyValidationContext } from "../property-validation-context"
-import { RuleChecker } from "../rule-checker"
-import { Unconformity } from "../unconformity"
-import { isStringOrArray, Maybe } from "../utils"
+import { PropertyValidationContext } from "../property-validation-context";
+import { RuleChecker } from "../rule-checker";
+import { Unconformity } from "../unconformity";
+import { isStringOrArray, Maybe } from "../utils";
 
-export type AcceptedType = Maybe<string | Array<any>>
+export type AcceptedType = Maybe<string | unknown[]>;
 
 export class MaxLengthRule<TRoot> extends RuleChecker<TRoot, AcceptedType> {
   constructor(readonly maxLength: number) {
-    super()
+    super();
   }
 
-  async check(context: PropertyValidationContext<TRoot, AcceptedType>): Promise<Unconformity | null> {
-    const { propertyValue } = context
+  protected async checkValue(
+    context: PropertyValidationContext<TRoot, AcceptedType>
+  ): Promise<Unconformity | undefined> {
+    const { propertyValue } = context;
 
-    if (isStringOrArray(propertyValue) && propertyValue.length > this.maxLength) {
-      return Unconformity.fromContext(context, 'maxLength', {
-        maxLength: this.maxLength
-      })
+    if (
+      isStringOrArray(propertyValue) &&
+      propertyValue.length > this.maxLength
+    ) {
+      return Unconformity.fromContext(context, "maxLength", {
+        maxLength: this.maxLength,
+      });
     }
 
-    return null
+    return undefined;
   }
 }
 
 export function maxLength<TRoot>(length: number): MaxLengthRule<TRoot> {
-  return new MaxLengthRule<TRoot>(length)
+  return new MaxLengthRule<TRoot>(length);
 }

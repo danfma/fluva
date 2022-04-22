@@ -1,7 +1,7 @@
 {
-  "extends": "../../tsconfig.base",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./lib/es5",
+    "outDir": "lib/esm",
     "baseUrl": ".",
     "rootDirs": [
       "src",
@@ -11,11 +11,13 @@
       "@fluva": [
         "src"
       ]
-    }
+    },
+    "types": [
+      "heft-jest"
+    ]
   },
   "include": [
-    "src/**/*",
-    "tests/**/*"
+    "src/**/*"
   ],
   "exclude": [
     "lib/**"
