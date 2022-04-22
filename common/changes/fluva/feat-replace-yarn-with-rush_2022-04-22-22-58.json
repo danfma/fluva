@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "fluva",
+      "comment": "Add \"satisfy\" rule for dynamic verification",
+      "type": "minor"
+    }
+  ],
+  "packageName": "fluva"
+}
