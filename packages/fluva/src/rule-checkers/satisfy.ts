@@ -1,7 +1,6 @@
 import { PropertyValidationContext } from "../property-validation-context";
 import { RuleChecker } from "../rule-checker";
 import { Unconformity } from "../unconformity";
-import { isNullOrUndefined } from "../utils";
 
 type SatisfyPredicate<TProperty, TRoot> = (
   value: TProperty,
