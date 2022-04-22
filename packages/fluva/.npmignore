@@ -1,6 +1,12 @@
 coverage
 node_modules
 tests
-jest.config.jest
-yarn.lock
+jest.config.json
 .npmrc
+temp
+src
+*.log
+.rush
+.heft
+.eslintrc.js
+config/

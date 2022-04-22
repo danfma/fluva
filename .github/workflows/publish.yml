@@ -3,23 +3,38 @@ name: Publish packages
 on:
   push:
     branches: 
-      - master
+      - main
 
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
         with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      - run: yarn
-      - run: yarn bootstrap
-      - run: yarn build
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+          version: 6.10.0
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: pnpm i -g @microsoft/rush
+
+      - run: rush install
+      
+      - run: rush build
+
+      - run: git config user.email "danfma@gmail.com"
+      - run: git config user.name "Daniel Ferreira Monteiro Alves"
+      
+      - run: rush publish --apply --publish --target-branch main --add-commit-details --set-access-level public
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: yarn publish-ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
