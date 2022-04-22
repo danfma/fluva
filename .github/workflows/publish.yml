@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
-      - run: pnpm i -g @microsoft/rush
+      - run: pnpm i -g @microsoft/rush -s
       - run: rush install
       - run: rush build
       - run: rush publish -p 
