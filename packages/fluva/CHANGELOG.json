@@ -1,0 +1,26 @@
+{
+  "name": "fluva",
+  "entries": [
+    {
+      "version": "1.0.0",
+      "tag": "fluva_v1.0.0",
+      "date": "Sat, 23 Apr 2022 02:45:56 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Remove incomplete functional support",
+            "author": "Daniel Ferreira Monteiro Alves <danfma@gmail.com>",
+            "commit": "7b50a768342d99a6759611f39935ad211df2a846"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Add \"satisfy\" rule for dynamic verification",
+            "author": "Daniel Ferreira Monteiro Alves <danfma@gmail.com>",
+            "commit": "7b50a768342d99a6759611f39935ad211df2a846"
+          }
+        ]
+      }
+    }
+  ]
+}
