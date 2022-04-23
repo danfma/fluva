@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "fluva-mobx",
+      "comment": "Remove test script for now",
+      "type": "none"
+    }
+  ],
+  "packageName": "fluva-mobx"
+}
