@@ -8,8 +8,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "heft build --clean",
-    "test": "nps test",
-    "test:watch": "nps test.watch"
+    "test": ""
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
