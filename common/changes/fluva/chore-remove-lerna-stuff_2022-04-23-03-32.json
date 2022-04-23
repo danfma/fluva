@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "fluva",
+      "comment": "Add tests to \"satisfy\" and some documentation",
+      "type": "patch"
+    }
+  ],
+  "packageName": "fluva"
+}
