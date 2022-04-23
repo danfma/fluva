@@ -1,0 +1,31 @@
+{
+  "name": "fluva-mobx",
+  "entries": [
+    {
+      "version": "0.1.0",
+      "tag": "fluva-mobx_v0.1.0",
+      "date": "Sat, 23 Apr 2022 03:52:15 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove test script for now",
+            "author": "Daniel Ferreira Monteiro Alves <danfma@gmail.com>",
+            "commit": "607656ea6a60eba3333d76c347fc96baae839c46"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Upgrade dependencies",
+            "author": "Daniel Ferreira Monteiro Alves <danfma@gmail.com>",
+            "commit": "607656ea6a60eba3333d76c347fc96baae839c46"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"fluva\" from `^0.0.3` to `^1.0.0`"
+          }
+        ]
+      }
+    }
+  ]
+}

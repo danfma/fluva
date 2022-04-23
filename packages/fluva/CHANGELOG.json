@@ -1,0 +1,33 @@
+{
+  "name": "fluva",
+  "entries": [
+    {
+      "version": "1.0.0",
+      "tag": "fluva_v1.0.0",
+      "date": "Sat, 23 Apr 2022 03:52:15 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add tests to \"satisfy\" and some documentation",
+            "author": "Daniel Ferreira Monteiro Alves <danfma@gmail.com>",
+            "commit": "607656ea6a60eba3333d76c347fc96baae839c46"
+          }
+        ],
+        "major": [
+          {
+            "comment": "Remove incomplete functional support",
+            "author": "Daniel Ferreira Monteiro Alves <danfma@gmail.com>",
+            "commit": "607656ea6a60eba3333d76c347fc96baae839c46"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Add \"satisfy\" rule for dynamic verification",
+            "author": "Daniel Ferreira Monteiro Alves <danfma@gmail.com>",
+            "commit": "607656ea6a60eba3333d76c347fc96baae839c46"
+          }
+        ]
+      }
+    }
+  ]
+}
