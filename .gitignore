@@ -1,5 +1,7 @@
 packages/*/lib
 packages/*/temp
+coverage
+temp
 
 # Logs
 *.log
