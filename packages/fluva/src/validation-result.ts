@@ -1,11 +1,24 @@
-import { Unconformity } from "./unconformity";
+import { Inconsistency } from "./inconsistency";
 
 export class ValidationResult {
   static readonly empty = new ValidationResult();
 
-  constructor(readonly unconformities: Unconformity[] = []) {}
+  constructor(readonly inconsistencies: Inconsistency[] = []) {}
 
-  get invalid(): boolean {
-    return this.unconformities.length > 0;
+  get hasInconsistencies(): boolean {
+    return this.inconsistencies.length > 0;
+  }
+
+  filterByPropertyPath(
+    path: string,
+    options?: { exactMatch: boolean }
+  ): Inconsistency[] {
+    const { exactMatch } = options ?? {};
+
+    return this.inconsistencies.filter((inconsistency) =>
+      exactMatch
+        ? inconsistency.validatingPathAsString === path
+        : inconsistency.validatingPathAsString.startsWith(path)
+    );
   }
 }

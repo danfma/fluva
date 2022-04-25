@@ -1,7 +1,7 @@
 import { CascadeChecking } from "./cascade-checking";
 import { PropertyValidationContext } from "./property-validation-context";
 import { RuleChecker } from "./rule-checker";
-import { Unconformity } from "./unconformity";
+import { Inconsistency } from "./inconsistency";
 import { ValidationContext } from "./validation-context";
 
 export class PropertyRule<TRoot, TProperty> {
@@ -11,10 +11,10 @@ export class PropertyRule<TRoot, TProperty> {
     readonly checkers: Array<RuleChecker<TRoot, TProperty>> = []
   ) {}
 
-  async verify(context: ValidationContext<TRoot>): Promise<Unconformity[]> {
+  async verify(context: ValidationContext<TRoot>): Promise<Inconsistency[]> {
     const { parent, cascade } = context;
     const propertyValue = this.getter(parent);
-    const unconformities: Unconformity[] = [];
+    const inconsistencies: Inconsistency[] = [];
 
     for (const checker of this.checkers) {
       const propertyContext = new PropertyValidationContext(
@@ -24,20 +24,20 @@ export class PropertyRule<TRoot, TProperty> {
         propertyValue
       );
 
-      const unconformity = await checker.check(propertyContext);
+      const inconsistency = await checker.check(propertyContext);
 
-      if (!unconformity) {
+      if (!inconsistency) {
         continue;
       }
 
-      unconformities.push(unconformity);
+      inconsistencies.push(inconsistency);
 
       if (cascade === CascadeChecking.StopOnFirstError) {
         break;
       }
     }
 
-    return unconformities;
+    return inconsistencies;
   }
 
   toString(): string {

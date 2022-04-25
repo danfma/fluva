@@ -1,11 +1,11 @@
-import { Unconformity, ValidationError } from "fluva"
+import { Inconsistency, ValidationError } from "fluva"
 import { action, computed, observable } from "mobx"
 
 type Maybe<T> = T | null | undefined
 
-export interface ReportedUnconformity {
+export interface ReportedInconsistency {
   remotelyValidated?: boolean
-  unconformity: Unconformity
+  Inconsistency: Inconsistency
 }
 
 export interface UpdateResult {
@@ -16,92 +16,92 @@ export class ValidationReport {
   static readonly empty = new ValidationReport();
 
   @observable
-  readonly unconformitiesByPath = observable.map<string, ReportedUnconformity>();
+  readonly inconsistenciesByPath = observable.map<string, ReportedInconsistency>();
 
   @computed
   get hasErrors(): boolean {
-    return this.unconformitiesByPath.size > 0
+    return this.inconsistenciesByPath.size > 0
   }
 
   @computed
-  get allUnconformities(): ReportedUnconformity[] {
-    return [...this.unconformitiesByPath.values()]
+  get allinconsistencies(): ReportedInconsistency[] {
+    return [...this.inconsistenciesByPath.values()]
   }
 
   @computed
   get hasLocalErrors(): boolean {
-    return this.allUnconformities.some(failure => failure && !failure.remotelyValidated)
+    return this.allinconsistencies.some(failure => failure && !failure.remotelyValidated)
   }
 
   @computed
   get errorsCount(): number {
-    return this.allUnconformities.map(failure => !!failure).length
+    return this.allinconsistencies.map(failure => !!failure).length
   }
 
-  findUnconformity(propertyNameOrRegExp: string | RegExp): Unconformity | null {
-    let unconformity: Maybe<Unconformity> = null
+  findInconsistency(propertyNameOrRegExp: string | RegExp): Inconsistency | null {
+    let Inconsistency: Maybe<Inconsistency> = null
 
     if (typeof propertyNameOrRegExp === 'string') {
-      unconformity = this.unconformitiesByPath.get(propertyNameOrRegExp)?.unconformity
+      Inconsistency = this.inconsistenciesByPath.get(propertyNameOrRegExp)?.Inconsistency
     } else {
-      for (const [key, item] of this.unconformitiesByPath.entries()) {
+      for (const [key, item] of this.inconsistenciesByPath.entries()) {
         if (propertyNameOrRegExp.test(key)) {
-          unconformity = item?.unconformity
+          Inconsistency = item?.Inconsistency
           break
         }
       }
     }
 
-    return unconformity ?? null
+    return Inconsistency ?? null
   }
 
-  hasUnconformity(property: string | RegExp): boolean {
-    return !!this.findUnconformity(property)
+  hasInconsistency(property: string | RegExp): boolean {
+    return !!this.findInconsistency(property)
   }
 
   @action
   clear(properties: string[] = []): void {
     if (properties.length > 0) {
       properties.forEach(property => {
-        this.unconformitiesByPath.delete(property)
+        this.inconsistenciesByPath.delete(property)
       })
     } else {
-      this.unconformitiesByPath.clear()
+      this.inconsistenciesByPath.clear()
     }
   }
 
   @action
   clearError(property: string): void {
-    this.unconformitiesByPath.delete(property)
+    this.inconsistenciesByPath.delete(property)
   }
 
   @action
-  setError(property: string, unconformity: Unconformity | null, remotelyValidated = false): void {
-    if (unconformity) {
-      this.unconformitiesByPath.set(property, { unconformity, remotelyValidated })
-    } else if (this.unconformitiesByPath.has(property)) {
-      this.unconformitiesByPath.delete(property)
+  setError(property: string, Inconsistency: Inconsistency | null, remotelyValidated = false): void {
+    if (Inconsistency) {
+      this.inconsistenciesByPath.set(property, { Inconsistency, remotelyValidated })
+    } else if (this.inconsistenciesByPath.has(property)) {
+      this.inconsistenciesByPath.delete(property)
     }
   }
 
-  private toUnconformitiesMap(unconformities: Unconformity[]): Map<string, Unconformity | null> {
-    return new Map<string, Unconformity | null>(
-      unconformities.map(unconformity => [unconformity.validatingPath.join('.'), unconformity])
+  private toinconsistenciesMap(inconsistencies: Inconsistency[]): Map<string, Inconsistency | null> {
+    return new Map<string, Inconsistency | null>(
+      inconsistencies.map(Inconsistency => [Inconsistency.validatingPath.join('.'), Inconsistency])
     )
   }
 
   @action
-  update(properties: string[], unconformities: Unconformity[], remotelyValidated = false): void {
+  update(properties: string[], inconsistencies: Inconsistency[], remotelyValidated = false): void {
     this.clear(properties)
 
-    for (const [property, unconformity] of this.toUnconformitiesMap(unconformities)) {
-      this.setError(property, unconformity, remotelyValidated)
+    for (const [property, Inconsistency] of this.toinconsistenciesMap(inconsistencies)) {
+      this.setError(property, Inconsistency, remotelyValidated)
     }
   }
 
   @action
   updateFromValidationError(validationError: ValidationError): void {
-    this.update(validationError.validatedProperties, validationError.unconformities, validationError.remotelyValidated)
+    this.update(validationError.validatedProperties, validationError.inconsistencies, validationError.remotelyValidated)
   }
 
   handleError(e: Error): boolean {

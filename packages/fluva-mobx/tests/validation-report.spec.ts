@@ -1,6 +1,6 @@
 describe("ValidationReport", () => {
-  it.todo("should find unconformity by property")
-  it.todo("should find unconformity by property pattern")
+  it.todo("should find Inconsistency by property")
+  it.todo("should find Inconsistency by property pattern")
   it.todo("should distinguish between local and remote errors")
   it.todo("should clean the report")
   it.todo("should update errors when calling update")

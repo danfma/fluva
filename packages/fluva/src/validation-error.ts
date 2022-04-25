@@ -1,4 +1,4 @@
-import { Unconformity } from "./unconformity";
+import { Inconsistency } from "./inconsistency";
 import { ValidationResult } from "./validation-result";
 
 export class ValidationError extends Error {
@@ -11,7 +11,7 @@ export class ValidationError extends Error {
     Object.setPrototypeOf(this, ValidationError.prototype);
   }
 
-  get unconformities(): Unconformity[] {
-    return this.validationResult.unconformities;
+  get inconsistencies(): Inconsistency[] {
+    return this.validationResult.inconsistencies;
   }
 }

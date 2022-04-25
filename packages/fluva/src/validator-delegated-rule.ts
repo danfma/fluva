@@ -1,5 +1,5 @@
 import { Rule } from "./rule";
-import { Unconformity } from "./unconformity";
+import { Inconsistency } from "./inconsistency";
 import { ValidationContext } from "./validation-context";
 import { Validator } from "./validator";
 
@@ -10,14 +10,14 @@ export class ValidatorDelegatedRule<TRoot, TProperty> implements Rule<TRoot> {
     readonly validator: Validator<TProperty>
   ) {}
 
-  async verify(context: ValidationContext<TRoot>): Promise<Unconformity[]> {
+  async verify(context: ValidationContext<TRoot>): Promise<Inconsistency[]> {
     const { parent } = context;
     const propertyValue = this.getter(parent);
     const result = await this.validator.validate(propertyValue);
 
-    return result.unconformities.map((unconformity) =>
-      unconformity.with({
-        validatingPath: [this.property, ...unconformity.validatingPath],
+    return result.inconsistencies.map((Inconsistency) =>
+      Inconsistency.with({
+        validatingPath: [this.property, ...Inconsistency.validatingPath],
       })
     );
   }

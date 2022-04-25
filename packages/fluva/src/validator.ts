@@ -13,13 +13,7 @@ export interface Validator<T> {
    * @param cascade Determines if the checker behaviour when an error was found.
    */
   validate(
-    instance: T,
-    properties?: string[],
-    cascade?: CascadeChecking
-  ): Promise<ValidationResult>;
-
-  validate(
-    context: ValidationContext<T>,
+    instance: T | ValidationContext<T>,
     properties?: string[],
     cascade?: CascadeChecking
   ): Promise<ValidationResult>;

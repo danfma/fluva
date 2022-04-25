@@ -3,23 +3,21 @@
   "compilerOptions": {
     "outDir": "lib/esm",
     "baseUrl": ".",
-    "rootDirs": [
-      "src",
-      "src/tests"
-    ],
     "paths": {
       "@fluva": [
         "src"
       ]
     },
     "types": [
-      "heft-jest"
+      "vitest/globals"
     ]
   },
-  "include": [
-    "src/**/*"
-  ],
+  "include": ["**/*"],
   "exclude": [
-    "lib/**"
+    "node_modules",
+    "lib",
+    "temp",
+    ".rush",
+    ".heft",
   ]
 }

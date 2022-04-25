@@ -1,6 +1,6 @@
 import { PropertyValidationContext } from "../property-validation-context";
 import { RuleChecker } from "../rule-checker";
-import { Unconformity } from "../unconformity";
+import { Inconsistency } from "../inconsistency";
 
 /**
  * The predicate function that will be used to check if the value is valid.
@@ -27,12 +27,12 @@ export class SatisfyRule<TRoot, TProperty> extends RuleChecker<
 
   protected async checkValue(
     context: PropertyValidationContext<TRoot, TProperty>
-  ): Promise<Unconformity | undefined> {
+  ): Promise<Inconsistency | undefined> {
     const { propertyValue } = context;
     const satisfied = await this.predicate(propertyValue, context.parent);
 
     if (!satisfied) {
-      return Unconformity.fromContext(context, this.errorType);
+      return Inconsistency.fromContext(context, this.errorType);
     }
 
     return undefined;

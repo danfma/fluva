@@ -1,6 +1,6 @@
 import { PropertyValidationContext } from "../property-validation-context";
 import { RuleChecker } from "../rule-checker";
-import { Unconformity } from "../unconformity";
+import { Inconsistency } from "../inconsistency";
 import { isStringOrArray, Maybe } from "../utils";
 
 export type AcceptedType = Maybe<string | unknown[]>;
@@ -12,14 +12,14 @@ export class MaxLengthRule<TRoot> extends RuleChecker<TRoot, AcceptedType> {
 
   protected async checkValue(
     context: PropertyValidationContext<TRoot, AcceptedType>
-  ): Promise<Unconformity | undefined> {
+  ): Promise<Inconsistency | undefined> {
     const { propertyValue } = context;
 
     if (
       isStringOrArray(propertyValue) &&
       propertyValue.length > this.maxLength
     ) {
-      return Unconformity.fromContext(context, "maxLength", {
+      return Inconsistency.fromContext(context, "maxLength", {
         maxLength: this.maxLength,
       });
     }

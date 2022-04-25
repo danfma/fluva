@@ -1,6 +1,6 @@
 import { PropertyValidationContext } from "../property-validation-context";
 import { RuleChecker } from "../rule-checker";
-import { Unconformity } from "../unconformity";
+import { Inconsistency } from "../inconsistency";
 
 type Getter<TRoot, TProperty> = (parent: TRoot) => TProperty;
 type ValueOrGetter<TRoot, TProperty> = Getter<TRoot, TProperty> | TProperty;
@@ -21,12 +21,12 @@ export class EqualToRule<TRoot, TProperty> extends RuleChecker<
 
   protected async checkValue(
     context: PropertyValidationContext<TRoot, TProperty>
-  ): Promise<Unconformity | undefined> {
+  ): Promise<Inconsistency | undefined> {
     const { propertyValue, parent } = context;
     const expectedValue = this.getExpectedValue(parent);
 
     if (propertyValue !== expectedValue) {
-      return Unconformity.fromContext(context, "equalTo", {
+      return Inconsistency.fromContext(context, "equalTo", {
         expected: expectedValue,
       });
     }

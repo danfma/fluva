@@ -18,26 +18,26 @@ describe("IsEmail", () => {
   async function expectInvalid(user: User): Promise<void> {
     const result = await validator.validate(user);
 
-    expect(result.invalid).toBeTruthy();
-    expect(result.unconformities).toHaveLength(1);
-    expect(result.unconformities[0].errorType).toBe("email");
+    expect(result.hasInconsistencies).toBeTruthy();
+    expect(result.inconsistencies).toHaveLength(1);
+    expect(result.inconsistencies[0].errorType).toBe("email");
   }
 
   async function expectValid(user: User): Promise<void> {
     const result = await validator.validate(user);
 
-    expect(result.invalid).toBeFalsy();
-    expect(result.unconformities).toHaveLength(0);
+    expect(result.hasInconsistencies).toBeFalsy();
+    expect(result.inconsistencies).toHaveLength(0);
   }
 
-  it("should generate an unconformity when email is invalid", async () => {
+  it("should generate an Inconsistency when email is invalid", async () => {
     await expectInvalid(new User(""));
     await expectInvalid(new User("a"));
     await expectInvalid(new User("abc"));
     await expectInvalid(new User("2@gmail.com"));
   });
 
-  it("should not generate unconformities when email is valid", async () => {
+  it("should not generate inconsistencies when email is valid", async () => {
     await expectValid(new User("abc@domain"));
     await expectValid(new User("abc@domain.io"));
     await expectValid(new User("abc@domain.com.br"));
