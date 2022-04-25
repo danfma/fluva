@@ -1,6 +1,6 @@
 {
   "name": "fluva-mobx",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "typings": "lib/esm/index.d.ts",
@@ -20,7 +20,7 @@
     "@rushstack/eslint-config": "^2.5.4"
   },
   "dependencies": {
-    "fluva": "workspace:^1.0.0",
+    "fluva": "workspace:^2.0.0",
     "mobx": "^4.15"
   }
 }

@@ -2,6 +2,25 @@
   "name": "fluva-mobx",
   "entries": [
     {
+      "version": "1.0.0",
+      "tag": "fluva-mobx_v1.0.0",
+      "date": "Mon, 25 Apr 2022 19:58:30 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Apply rename of \"Unconformity\" to \"Inconsistency\".",
+            "author": "Daniel Ferreira Monteiro Alves <danfma@gmail.com>",
+            "commit": "ba58247ae936220cf27850d4fa10d0b4f6f8ce86"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"fluva\" from `^1.0.0` to `^2.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.0",
       "tag": "fluva-mobx_v0.1.0",
       "date": "Sat, 23 Apr 2022 03:57:09 GMT",
