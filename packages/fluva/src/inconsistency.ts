@@ -1,7 +1,7 @@
 import { PropertyValidationContext } from "./property-validation-context";
 import { Severity } from "./severity";
 
-export class Unconformity {
+export class Inconsistency {
   constructor(
     readonly errorType: string,
     readonly validatingPath: string[],
@@ -15,7 +15,7 @@ export class Unconformity {
     return this.validatingPath.join(".");
   }
 
-  with(data: Partial<Unconformity>): Unconformity {
+  with(data: Partial<Inconsistency>): Inconsistency {
     const {
       errorType = this.errorType,
       validatingPath = this.validatingPath,
@@ -25,7 +25,7 @@ export class Unconformity {
       additionalMessageParams = this.additionalMessageParams,
     } = data;
 
-    return new Unconformity(
+    return new Inconsistency(
       errorType,
       validatingPath,
       validatingFieldName,
@@ -39,8 +39,8 @@ export class Unconformity {
     context: PropertyValidationContext,
     errorType: string,
     additionalMessageParams: Record<string, unknown> = {}
-  ): Unconformity {
-    return new Unconformity(
+  ): Inconsistency {
+    return new Inconsistency(
       errorType,
       context.propertyPath,
       context.propertyName,

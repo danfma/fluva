@@ -1,5 +1,5 @@
 import { PropertyValidationContext } from "../property-validation-context";
-import { Unconformity } from "../unconformity";
+import { Inconsistency } from "../inconsistency";
 import { MatchPatternRule } from "./match-pattern";
 
 export class EmailRule<TRoot> extends MatchPatternRule<TRoot> {
@@ -12,11 +12,11 @@ export class EmailRule<TRoot> extends MatchPatternRule<TRoot> {
 
   protected async checkValue(
     context: PropertyValidationContext<TRoot, string>
-  ): Promise<Unconformity | undefined> {
-    const unconformity = await super.checkValue(context);
+  ): Promise<Inconsistency | undefined> {
+    const Inconsistency = await super.checkValue(context);
 
     return (
-      unconformity?.with({
+      Inconsistency?.with({
         errorType: "email",
         message: "validation.rule.email",
       }) ?? undefined

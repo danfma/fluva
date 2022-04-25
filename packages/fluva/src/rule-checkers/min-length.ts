@@ -1,6 +1,6 @@
 import { PropertyValidationContext } from "../property-validation-context";
 import { RuleChecker } from "../rule-checker";
-import { Unconformity } from "../unconformity";
+import { Inconsistency } from "../inconsistency";
 import { isStringOrArray, Maybe } from "../utils";
 
 export type AcceptedType = Maybe<string | unknown[]>;
@@ -12,14 +12,14 @@ export class MinLengthRule<TRoot> extends RuleChecker<TRoot, AcceptedType> {
 
   protected async checkValue(
     context: PropertyValidationContext<TRoot, AcceptedType>
-  ): Promise<Unconformity | undefined> {
+  ): Promise<Inconsistency | undefined> {
     const { propertyValue } = context;
 
     if (
       isStringOrArray(propertyValue) &&
       propertyValue.length < this.minLength
     ) {
-      return Unconformity.fromContext(context, "minLength", {
+      return Inconsistency.fromContext(context, "minLength", {
         minLength: this.minLength,
       });
     }

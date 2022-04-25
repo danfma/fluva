@@ -32,7 +32,6 @@ describe("Class based composed validation", () => {
       super();
 
       this.ruleFor("phones").verify(minLength(1), maxLength(3));
-
       this.ruleFor("phones").useValidator(forEach(new PhoneValidator()));
     }
   }
@@ -42,9 +41,9 @@ describe("Class based composed validation", () => {
     const validator = new PersonValidator();
     const result = await validator.validate(person);
 
-    expect(result.invalid).toBeTruthy();
-    expect(result.unconformities).toHaveLength(1);
-    expect(result.unconformities[0].errorType).toBe("minLength");
+    expect(result.hasInconsistencies).toBeTruthy();
+    expect(result.inconsistencies).toHaveLength(1);
+    expect(result.inconsistencies[0].errorType).toBe("minLength");
   });
 
   it("should report phone's maxLength as invalid", async () => {
@@ -58,9 +57,9 @@ describe("Class based composed validation", () => {
     const validator = new PersonValidator();
     const result = await validator.validate(person);
 
-    expect(result.invalid).toBeTruthy();
-    expect(result.unconformities).toHaveLength(1);
-    expect(result.unconformities[0].errorType).toBe("maxLength");
+    expect(result.hasInconsistencies).toBeTruthy();
+    expect(result.inconsistencies).toHaveLength(1);
+    expect(result.inconsistencies[0].errorType).toBe("maxLength");
   });
 
   it("should validate the inner properties of the Person with the specified validator", async () => {
@@ -73,14 +72,14 @@ describe("Class based composed validation", () => {
     const validator = new PersonValidator();
     const result = await validator.validate(person);
 
-    expect(result.invalid).toBeTruthy();
-    expect(result.unconformities).toHaveLength(2);
-    expect(result.unconformities[0].errorType).toBe("onlyDigits");
-    expect(result.unconformities[0].validatingPathAsString).toBe(
+    expect(result.hasInconsistencies).toBeTruthy();
+    expect(result.inconsistencies).toHaveLength(2);
+    expect(result.inconsistencies[0].errorType).toBe("onlyDigits");
+    expect(result.inconsistencies[0].validatingPathAsString).toBe(
       "phones.0.phoneNumber"
     );
-    expect(result.unconformities[1].errorType).toBe("onlyDigits");
-    expect(result.unconformities[1].validatingPathAsString).toBe(
+    expect(result.inconsistencies[1].errorType).toBe("onlyDigits");
+    expect(result.inconsistencies[1].validatingPathAsString).toBe(
       "phones.2.phoneNumber"
     );
   });

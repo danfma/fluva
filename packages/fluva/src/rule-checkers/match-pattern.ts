@@ -1,6 +1,6 @@
 import { PropertyValidationContext } from "../property-validation-context";
 import { RuleChecker } from "../rule-checker";
-import { Unconformity } from "../unconformity";
+import { Inconsistency } from "../inconsistency";
 import { Maybe } from "../utils";
 
 export class MatchPatternRule<TRoot> extends RuleChecker<TRoot, Maybe<string>> {
@@ -10,14 +10,14 @@ export class MatchPatternRule<TRoot> extends RuleChecker<TRoot, Maybe<string>> {
 
   protected async checkValue(
     context: PropertyValidationContext<TRoot, string>
-  ): Promise<Unconformity | undefined> {
+  ): Promise<Inconsistency | undefined> {
     const { propertyValue } = context;
 
     if (
       typeof propertyValue === "string" &&
       !this.pattern.test(propertyValue)
     ) {
-      return Unconformity.fromContext(context, "pattern");
+      return Inconsistency.fromContext(context, "pattern");
     }
 
     return undefined;

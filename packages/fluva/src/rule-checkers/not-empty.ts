@@ -1,5 +1,5 @@
 import { PropertyValidationContext } from "../property-validation-context";
-import { Unconformity } from "../unconformity";
+import { Inconsistency } from "../inconsistency";
 import { Maybe } from "../utils";
 import { MinLengthRule } from "./min-length";
 
@@ -12,11 +12,11 @@ export class NotEmptyRule<TRoot> extends MinLengthRule<TRoot> {
 
   protected async checkValue(
     context: PropertyValidationContext<TRoot, AcceptedType>
-  ): Promise<Unconformity | undefined> {
-    const unconformity = await super.checkValue(context);
+  ): Promise<Inconsistency | undefined> {
+    const Inconsistency = await super.checkValue(context);
 
     return (
-      unconformity?.with({
+      Inconsistency?.with({
         errorType: "notEmpty",
         message: "validation.rule.notEmpty",
       }) ?? undefined

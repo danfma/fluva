@@ -4,6 +4,7 @@ import {
   maxLength,
   notEmpty,
   required,
+  Severity,
   ValidationError,
 } from "@fluva";
 
@@ -28,15 +29,15 @@ describe("Simple class validation", () => {
     const person = new Person();
     const result = await validator.validate(person);
 
-    expect(result.invalid).toBeTruthy();
-    expect(result.unconformities).toHaveLength(2);
+    expect(result.hasInconsistencies).toBeTruthy();
+    expect(result.inconsistencies).toHaveLength(2);
 
-    expect(result.unconformities).toEqual([
+    expect(result.inconsistencies).toEqual([
       {
         additionalMessageParams: {},
         errorType: "required",
         message: "validation.rule.required",
-        severity: "error",
+        severity: Severity.Error,
         validatingFieldName: "name",
         validatingPath: ["name"],
       },
@@ -44,7 +45,7 @@ describe("Simple class validation", () => {
         additionalMessageParams: {},
         errorType: "required",
         message: "validation.rule.required",
-        severity: "error",
+        severity: Severity.Error,
         validatingFieldName: "surname",
         validatingPath: ["surname"],
       },
@@ -60,15 +61,15 @@ describe("Simple class validation", () => {
 
     const result = await validator.validate(person);
 
-    expect(result.invalid).toBeTruthy();
-    expect(result.unconformities).toHaveLength(2);
+    expect(result.hasInconsistencies).toBeTruthy();
+    expect(result.inconsistencies).toHaveLength(2);
 
-    expect(result.unconformities).toEqual([
+    expect(result.inconsistencies).toEqual([
       {
         additionalMessageParams: {},
         errorType: "required",
         message: "validation.rule.required",
-        severity: "error",
+        severity: Severity.Error,
         validatingFieldName: "name",
         validatingPath: ["name"],
       },
@@ -76,7 +77,7 @@ describe("Simple class validation", () => {
         additionalMessageParams: {},
         errorType: "required",
         message: "validation.rule.required",
-        severity: "error",
+        severity: Severity.Error,
         validatingFieldName: "surname",
         validatingPath: ["surname"],
       },
@@ -98,7 +99,7 @@ describe("Simple class validation", () => {
         throw e;
       }
 
-      expect(e.unconformities).toHaveLength(2);
+      expect(e.inconsistencies).toHaveLength(2);
     }
   });
 });

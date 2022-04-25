@@ -1,1 +1,1 @@
-export { ReportedUnconformity, UpdateResult, ValidationReport } from "./validation-report"
+export { ReportedInconsistency, UpdateResult, ValidationReport } from "./validation-report"

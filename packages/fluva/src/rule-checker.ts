@@ -1,12 +1,12 @@
 import { PropertyValidationContext } from "./property-validation-context";
 import { Severity } from "./severity";
-import { Unconformity } from "./unconformity";
+import { Inconsistency } from "./inconsistency";
 import { isNullOrUndefined } from "./utils";
 
 export abstract class RuleChecker<TRoot, TProperty> {
   protected abstract checkValue(
     context: PropertyValidationContext<TRoot, TProperty>
-  ): Promise<Unconformity | undefined>;
+  ): Promise<Inconsistency | undefined>;
 
   /**
    * Check the value of the property contained in the specified validation context.
@@ -16,7 +16,7 @@ export abstract class RuleChecker<TRoot, TProperty> {
    */
   async check(
     context: PropertyValidationContext<TRoot, TProperty>
-  ): Promise<Unconformity | undefined> {
+  ): Promise<Inconsistency | undefined> {
     const { propertyValue } = context;
 
     return !isNullOrUndefined(propertyValue)
@@ -30,10 +30,10 @@ export abstract class RuleChecker<TRoot, TProperty> {
     return new (class extends RuleChecker<TRoot, TProperty> {
       async checkValue(
         context: PropertyValidationContext<TRoot, TProperty>
-      ): Promise<Unconformity | undefined> {
-        const unconformity = await sourceChecker.check(context);
+      ): Promise<Inconsistency | undefined> {
+        const Inconsistency = await sourceChecker.check(context);
 
-        return unconformity?.with({ message }) ?? undefined;
+        return Inconsistency?.with({ message }) ?? undefined;
       }
     })();
   }
@@ -44,10 +44,10 @@ export abstract class RuleChecker<TRoot, TProperty> {
     return new (class extends RuleChecker<TRoot, TProperty> {
       async checkValue(
         context: PropertyValidationContext<TRoot, TProperty>
-      ): Promise<Unconformity | undefined> {
-        const unconformity = await sourceChecker.check(context);
+      ): Promise<Inconsistency | undefined> {
+        const Inconsistency = await sourceChecker.check(context);
 
-        return unconformity?.with({ severity }) ?? undefined;
+        return Inconsistency?.with({ severity }) ?? undefined;
       }
     })();
   }

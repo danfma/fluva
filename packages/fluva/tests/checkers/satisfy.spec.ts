@@ -25,16 +25,16 @@ describe("satisfy rule", () => {
   const adult = new Person("Adult", 18);
 
   it("should not accept kids as adults", async () => {
-    const { unconformities } = await validator.validate(kid);
+    const { inconsistencies } = await validator.validate(kid);
 
-    expect(unconformities).toHaveLength(1);
-    expect(unconformities[0].errorType).toBe("satisfy");
-    expect(unconformities[0].validatingPathAsString).toBe("age");
+    expect(inconsistencies).toHaveLength(1);
+    expect(inconsistencies[0].errorType).toBe("satisfy");
+    expect(inconsistencies[0].validatingPathAsString).toBe("age");
   });
 
   it("should accept only adults", async () => {
-    const { unconformities } = await validator.validate(adult);
+    const { inconsistencies } = await validator.validate(adult);
 
-    expect(unconformities).toHaveLength(0);
+    expect(inconsistencies).toHaveLength(0);
   });
 });
