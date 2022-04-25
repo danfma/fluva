@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "fluva-mobx",
+      "comment": "Apply rename of \"Unconformity\" to \"Inconsistency\".",
+      "type": "major"
+    }
+  ],
+  "packageName": "fluva-mobx"
+}
