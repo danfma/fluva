@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "fluva",
+      "comment": "Rename \"Unconformity\" to \"Inconsistency\", fix Validator implementation and tests, and replace jest with vitest.",
+      "type": "major"
+    }
+  ],
+  "packageName": "fluva"
+}
